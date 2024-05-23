@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail View</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">Detail View</h2>
+    <div th:object="${board}">
+    <div class="card">
+        <div class="card-body">
+            <!-- Title -->
+            <div>
+                <label for="title"></label>
+                <input type="text" id="title" th:field="*{title}" class="card-text" value="test" th:value="*{title}" readonly>
+            </div>
+
+            <!-- Name -->
+            <div>
+                <label for="name">name</label>
+                <input type="text" id="name" th:field="*{name}" class="card-text" value="test" th:value="*{name}" readonly>
+            </div>
+
+            <!-- Content -->
+            <div>
+                <label for="content">content</label>
+                <input type="text" id="content" th:field="*{content}" class="card-text" value="test" th:value="*{content}" readonly>
+            </div>
+
+            <!-- Create Date -->
+            <div>
+                <label for="createDate">createDate</label>
+                <input type="text" id="createDate" th:field="*{createDate}" class="card-text" value="test" th:value="*{createDate}" readonly>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-info" onclick="goToList()" th:onclick="|location.href='@{/boards}'|">List</button>
+            <button class="btn btn-warning" onclick="editItem()" th:onclick="|location.href='@{/boards/update}'|">Edit</button>
+            <button class="btn btn-danger" onclick="deleteItem()" th:onclick="|location.href='@{/boards/delete}'|">Delete</button>
+        </div>
+    </div>
+    </div></div>
+
+<!--<script>
+    function goToList() {
+        // 여기에 목록 페이지로 이동하는 로직을 추가합니다.
+        alert('List button clicked');
+    }
+
+    function editItem() {
+        // 여기에 수정 페이지로 이동하는 로직을 추가합니다.
+        alert('Edit button clicked');
+    }
+
+    function deleteItem() {
+        // 여기에 삭제 로직을 추가합니다.
+        alert('Delete button clicked');
+    }
+
+    // 데이터 표시 예제 (실제 데이터로 대체 가능)
+    document.getElementById('title').innerText = '제목 예시';
+    document.getElementById('name').innerText = '이름 예시';
+    document.getElementById('content').innerText = '여기에 내용이 들어갑니다.';
+    document.getElementById('createDate').innerText = '2024-05-23';
+</script>-->
+</body>
+</html>
