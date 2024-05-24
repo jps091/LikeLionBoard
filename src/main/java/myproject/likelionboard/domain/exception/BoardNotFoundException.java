@@ -1,7 +1,20 @@
 package myproject.likelionboard.domain.exception;
 
 public class BoardNotFoundException extends RuntimeException{
-    public BoardNotFoundException(String s) {
-        super(s);
+
+    public BoardNotFoundException() {
+        super();
+    }
+
+    public BoardNotFoundException(String message) {
+        super(message);
+    }
+
+    public BoardNotFoundException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public BoardNotFoundException(Throwable cause) {
+        super(cause);
     }
 }

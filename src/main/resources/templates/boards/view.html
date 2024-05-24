@@ -1,70 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail View</title>
+    <title>Form Example</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
 </head>
 <body>
 <div class="container mt-5">
-    <h2 class="mb-4">Detail View</h2>
+    <h2 class="mb-4">게시판 상세</h2>
     <div th:object="${board}">
-    <div class="card">
-        <div class="card-body">
-            <!-- Title -->
-            <div>
-                <label for="title"></label>
-                <input type="text" id="title" th:field="*{title}" class="card-text" value="test" th:value="*{title}" readonly>
-            </div>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" th:field="*{title}"
+                   placeholder="Enter the title">
+        </div>
 
-            <!-- Name -->
-            <div>
-                <label for="name">name</label>
-                <input type="text" id="name" th:field="*{name}" class="card-text" value="test" th:value="*{name}" readonly>
-            </div>
+        <!-- Name -->
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}"
+                   placeholder="Enter your name">
+        </div>
 
-            <!-- Content -->
-            <div>
-                <label for="content">content</label>
-                <input type="text" id="content" th:field="*{content}" class="card-text" value="test" th:value="*{content}" readonly>
-            </div>
+        <!-- Content -->
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea class="form-control" id="content" rows="5" th:field="*{content}"
+                      placeholder="Enter the content"></textarea>
+        </div>
 
-            <!-- Create Date -->
-            <div>
-                <label for="createDate">createDate</label>
-                <input type="text" id="createDate" th:field="*{createDate}" class="card-text" value="test" th:value="*{createDate}" readonly>
-            </div>
+        <!-- Create Date -->
+        <div class="form-group">
+            <label for="createDate">createDate</label>
+            <textarea class="form-control" id="createDate" th:field="*{createDate}"
+                      placeholder="Enter the createDate"></textarea>
         </div>
         <div class="card-footer">
             <button class="btn btn-info" onclick="goToList()" th:onclick="|location.href='@{/boards}'|">List</button>
-            <button class="btn btn-warning" onclick="editItem()" th:onclick="|location.href='@{/boards/update}'|">Edit</button>
-            <button class="btn btn-danger" onclick="deleteItem()" th:onclick="|location.href='@{/boards/delete}'|">Delete</button>
+            <button class="btn btn-warning" onclick="editItem()" th:onclick="|location.href='@{/boards/update(id=${board.id})}'|">Edit</button>
+            <button class="btn btn-danger" onclick="deleteItem()" th:onclick="|location.href='@{/boards/delete(id=${board.id})}'|">Delete</button>
         </div>
     </div>
-    </div></div>
-
-<!--<script>
-    function goToList() {
-        // 여기에 목록 페이지로 이동하는 로직을 추가합니다.
-        alert('List button clicked');
-    }
-
-    function editItem() {
-        // 여기에 수정 페이지로 이동하는 로직을 추가합니다.
-        alert('Edit button clicked');
-    }
-
-    function deleteItem() {
-        // 여기에 삭제 로직을 추가합니다.
-        alert('Delete button clicked');
-    }
-
-    // 데이터 표시 예제 (실제 데이터로 대체 가능)
-    document.getElementById('title').innerText = '제목 예시';
-    document.getElementById('name').innerText = '이름 예시';
-    document.getElementById('content').innerText = '여기에 내용이 들어갑니다.';
-    document.getElementById('createDate').innerText = '2024-05-23';
-</script>-->
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

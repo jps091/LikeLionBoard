@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -25,5 +26,6 @@ public class Board {
     @NotBlank
     private String content;
     //@NotNull
-    private LocalDate createDate;
+    private LocalDateTime createDate;
+    private LocalDateTime updateDate;
 }
