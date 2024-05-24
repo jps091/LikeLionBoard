@@ -7,6 +7,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 public class TestDataInit {
@@ -21,7 +22,7 @@ public class TestDataInit {
         board.setContent("이거 품절 인가요?");
         board.setName("test");
         board.setPassword("123");
-        board.setCreateDate(LocalDate.now());
+        //board.setCreateDate(LocalDateTime.now());
         boardRepository.save(board);
 
         Board board2 = new Board();
@@ -29,7 +30,7 @@ public class TestDataInit {
         board2.setContent("이거 얼마 인가요?");
         board2.setName("test2");
         board2.setPassword("456");
-        board2.setCreateDate(LocalDate.now());
+        //board2.setCreateDate();
         boardRepository.save(board2);
     }
 }

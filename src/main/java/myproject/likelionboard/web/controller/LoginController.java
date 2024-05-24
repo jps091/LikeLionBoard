@@ -22,10 +22,12 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping
+*/
+/*    @GetMapping
     public String loginForm(@ModelAttribute("loginForm") DeleteForm loginForm){
         return "login/loginForm";
-    }
+    }*//*
+
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute("deleteForm") DeleteForm form, @RequestParam("id") Long id,
                         BindingResult bindingResult, HttpServletRequest request, RedirectAttributes redirectAttributes){

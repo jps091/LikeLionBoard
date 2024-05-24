@@ -25,7 +25,7 @@
             <td th:text="${board.id}">1</td>
             <td th:text="${board.name}">테스터</td>
             <td><a href="index.html" th:href="@{/boards/view(id=${board.id})}" th:text="${board.title}">Title</a></td>
-            <td th:text="${board.createDate}">2024/05/20</td>
+            <td th:text="${#temporals.format(board.createDate, 'yyyy/MM/dd')}">2024/05/20</td>
         </tr>
         </tbody>
     </table>

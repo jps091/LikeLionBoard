@@ -6,10 +6,11 @@ import myproject.likelionboard.domain.entity.UpdateDto;
 import myproject.likelionboard.domain.exception.BoardNotFoundException;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Slf4j
-@Repository
+//@Repository
 public class MemoryBoardRepository implements BoardRepository{
 
     private static Long sequence = 0L;
@@ -44,7 +45,7 @@ public class MemoryBoardRepository implements BoardRepository{
         target.setName(source.getName());
         target.setTitle(source.getTitle());
         target.setContent(source.getContent());
-        target.setCreateDate(source.getUpdateDate());
+        target.setCreateDate(source.getCreateDate());
     }
 
     @Override

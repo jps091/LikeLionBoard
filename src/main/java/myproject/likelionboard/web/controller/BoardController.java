@@ -64,42 +64,55 @@ public class BoardController {
         board.setTitle(param.getTitle());
         board.setContent(param.getContent());
         board.setPassword(param.getPassword());
-        board.setCreateDate(LocalDate.now());
+        board.setCreateDate(param.getCreateDate());
         return board;
     }
 
     @GetMapping("/update")
-    public String updateForm(Model model){
-        model.addAttribute("board", new Board());
+    public String updateForm(Model model, @RequestParam("id") Long id){
+        Board board = boardService.findById(id);
+        model.addAttribute("board", board);
         return "/boards/updateForm";
     }
 
     @PostMapping("/update")
-    public String updateBoard(@Validated @ModelAttribute("board") UpdateDto param, @RequestParam("id") Long id,
-                              BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String updateBoard(@Validated @ModelAttribute("board") UpdateDto param, BindingResult bindingResult,
+                              @RequestParam("id") Long id, RedirectAttributes redirectAttributes){
+
         if(bindingResult.hasErrors()){
             log.info("errors={}",bindingResult);
             return "/boards/updateForm";
         }
+
         Board board = boardService.findById(id);
         if(!param.getPassword().equals(board.getPassword())){
+            bindingResult.reject("loginFail", "비밀번호가 틀렸습니다.");
             return "/boards/updateForm";
         }
+
         boardService.updateBoard(id, param);
         redirectAttributes.addAttribute("id", id);
         return "redirect:/boards?id={id}";
     }
 
     @GetMapping("/delete")
-    public String deleteForm(Model model){
-        model.addAttribute("board", new Board());
+    public String deleteForm(@RequestParam("id") Long id, Model model){
+        Board board = boardService.findById(id);
+        model.addAttribute("board", board);
         return "/boards/deleteForm";
     }
 
     @PostMapping("/delete")
-    public String  deleteBoard(@RequestParam("id") Long id, DeleteForm form){
+    public String  deleteBoard(@RequestParam("id") Long id, @Validated @ModelAttribute("board") DeleteForm form, BindingResult bindingResult){
         Board deleteBoard = boardService.findById(id);
+
+        if(bindingResult.hasErrors()){
+            log.info("errors={}",bindingResult);
+            return "/boards/deleteForm";
+        }
+
         if(!form.getPassword().equals(deleteBoard.getPassword())){
+            bindingResult.reject("loginFail", "비밀번호가 틀렸습니다.");
             return "/boards/deleteForm";
         }
         boardService.deleteBoard(id);

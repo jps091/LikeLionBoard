@@ -27,25 +27,13 @@ public class BoardService {
     }
 
     public Board findById(Long id) {
-        if(boardRepository.findById(id).isPresent()){
-            return boardRepository.findById(id).get();
-        }else{
-            throw new BoardNotFoundException(id + " : 는 존재 하지않는 게시판 입니다.");
-        }
+        return boardRepository.findById(id).get();
     }
     public void updateBoard(Long id, UpdateDto param) {
-        if(boardRepository.findById(id).isPresent()){
-            boardRepository.update(id, param);
-        }else{
-            throw new BoardNotFoundException(id + " : 는 존재 하지않는 게시판 입니다.");
-        }
+        boardRepository.update(id, param);
     }
 
     public void deleteBoard(Long id) {
-        if(boardRepository.findById(id).isPresent()){
-            boardRepository.delete(id);
-        }else{
-            throw new BoardNotFoundException(id + " : 는 존재 하지않는 게시판 입니다.");
-        }
+        boardRepository.delete(id);
     }
 }
