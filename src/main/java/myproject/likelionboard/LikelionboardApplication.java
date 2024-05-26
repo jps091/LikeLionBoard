@@ -1,11 +1,13 @@
 package myproject.likelionboard;
 
-import myproject.likelionboard.domain.repository.BoardRepository;
+import myproject.likelionboard.domain.repository.board.BoardRepository;
+import myproject.likelionboard.domain.repository.member.SpringDataJpaMemberRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.Import;
 
+//@Import(SpringDataJpaMemberRepository.class)
 @SpringBootApplication
 public class LikelionboardApplication {
 
@@ -14,7 +16,7 @@ public class LikelionboardApplication {
 	}
 
 	@Bean
-	public TestDataInit testDataInit(BoardRepository boardRepository){
-		return new TestDataInit(boardRepository);
+	public TestDataInit testDataInit(BoardRepository boardRepository, SpringDataJpaMemberRepository memberRepository){
+		return new TestDataInit(boardRepository, memberRepository);
 	}
 }

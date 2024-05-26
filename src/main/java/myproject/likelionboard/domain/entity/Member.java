@@ -1,38 +1,28 @@
 package myproject.likelionboard.domain.entity;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-@Data
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Board {
+public class Member {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    private String name;
-    @NotBlank
-    private String title;
+    private String loginId;
     @NotBlank
     private String password;
-    @NotBlank
-    private String content;
-    //@NotNull
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
 }

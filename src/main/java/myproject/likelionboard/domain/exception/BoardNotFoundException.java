@@ -1,3 +1,4 @@
+/*
 package myproject.likelionboard.domain.exception;
 
 public class BoardNotFoundException extends RuntimeException{
@@ -18,3 +19,4 @@ public class BoardNotFoundException extends RuntimeException{
         super(cause);
     }
 }
+*/

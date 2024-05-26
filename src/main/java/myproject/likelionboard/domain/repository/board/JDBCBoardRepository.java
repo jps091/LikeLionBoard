@@ -1,11 +1,9 @@
-package myproject.likelionboard.domain.repository;
+package myproject.likelionboard.domain.repository.board;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import myproject.likelionboard.domain.entity.Board;
-import myproject.likelionboard.domain.entity.UpdateDto;
+import myproject.likelionboard.domain.dto.UpdateDto;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -15,7 +13,6 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +31,7 @@ public class JDBCBoardRepository implements BoardRepository{
     public JDBCBoardRepository(DataSource dataSource) {
         this.template = new NamedParameterJdbcTemplate(dataSource);
         this.jdbcInsert = new SimpleJdbcInsert(dataSource)
-                .withTableName("lion")
+                .withTableName("board")
                 .usingGeneratedKeyColumns("id");
     }
 
@@ -51,7 +48,7 @@ public class JDBCBoardRepository implements BoardRepository{
     @Override
     public List<Board> findAll() {
         try{
-            String sql = "select * from lion order by 1 desc";
+            String sql = "select * from board order by 1 desc";
             return template.query(sql, boardRowMapper());
         }catch (DataAccessException e) {
             throw new DataAccessException("Error accessing data for id: ", e) {};
@@ -60,7 +57,7 @@ public class JDBCBoardRepository implements BoardRepository{
 
     @Override
     public Optional<Board> findById(Long id) {
-        String sql = "select * from lion where id = :id";
+        String sql = "select * from board where id = :id";
         Map<String, Object> param = Map.of("id", id);
         Board board = template.queryForObject(sql, param, boardRowMapper());
         return Optional.of(board);
@@ -68,7 +65,7 @@ public class JDBCBoardRepository implements BoardRepository{
 
     @Override
     public void update(Long id, UpdateDto param) {
-        String sql = "update lion set title = :title, content = :content, name = :name " +
+        String sql = "update board set title = :title, content = :content, name = :name " +
                         "where id = :id";
         MapSqlParameterSource updateParam = new MapSqlParameterSource()
                 .addValue("title", param.getTitle())
@@ -80,7 +77,7 @@ public class JDBCBoardRepository implements BoardRepository{
 
     @Override
     public void delete(Long id) {
-        String sql = "delete from lion where id = :id";
+        String sql = "delete from board where id = :id";
         Map<String, Object> param = Map.of("id", id);
         template.update(sql, param);
     }

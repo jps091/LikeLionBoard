@@ -1,4 +1,4 @@
-package myproject.likelionboard.domain.entity;
+package myproject.likelionboard.domain.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -20,6 +20,6 @@ public class UpdateDto {
     @NotBlank(message = "내용은 필수 입력 사항 입니다.")
     private String content;
     private LocalDateTime createDate;
-    @NotBlank(message = "수정하려면 비밀번호는 필수 값 입니다.")
+    //@NotBlank(message = "수정하려면 비밀번호는 필수 값 입니다.")
     private String password;
 }

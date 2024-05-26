@@ -1,12 +1,9 @@
-package myproject.likelionboard.domain.repository;
+package myproject.likelionboard.domain.repository.board;
 
 import lombok.extern.slf4j.Slf4j;
 import myproject.likelionboard.domain.entity.Board;
-import myproject.likelionboard.domain.entity.UpdateDto;
-import myproject.likelionboard.domain.exception.BoardNotFoundException;
-import org.springframework.stereotype.Repository;
+import myproject.likelionboard.domain.dto.UpdateDto;
 
-import java.time.LocalDate;
 import java.util.*;
 
 @Slf4j
@@ -32,7 +29,6 @@ public class MemoryBoardRepository implements BoardRepository{
         return findAll().stream()
                 .filter(m -> m.getId().equals(id))
                 .findFirst();
-                //.orElseThrow(()-> new BoardNotFoundException("게시판 ID<" + id + ">는 존재 하지 않습니다."));
     }
 
     @Override
