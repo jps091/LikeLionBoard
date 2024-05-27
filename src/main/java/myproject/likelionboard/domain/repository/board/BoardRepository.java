@@ -1,7 +1,7 @@
-package myproject.likelionboard.domain.repository;
+package myproject.likelionboard.domain.repository.board;
 
 import myproject.likelionboard.domain.entity.Board;
-import myproject.likelionboard.domain.entity.UpdateDto;
+import myproject.likelionboard.domain.dto.UpdateDto;
 
 import java.util.List;
 import java.util.Optional;

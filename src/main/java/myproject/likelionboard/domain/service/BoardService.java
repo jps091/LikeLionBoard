@@ -2,10 +2,11 @@ package myproject.likelionboard.domain.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import myproject.likelionboard.domain.dto.SearchBoard;
 import myproject.likelionboard.domain.entity.Board;
-import myproject.likelionboard.domain.entity.UpdateDto;
-import myproject.likelionboard.domain.exception.BoardNotFoundException;
-import myproject.likelionboard.domain.repository.BoardRepository;
+import myproject.likelionboard.domain.dto.UpdateDto;
+import myproject.likelionboard.domain.repository.board.BoardRepository;
+import myproject.likelionboard.domain.repository.board.QueryBoardRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +17,15 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final QueryBoardRepository queryBoardRepository;
 
     public void create(Board board) {
         boardRepository.save(board);
         log.info("save board={}",board);
     }
 
-    public List<Board> findAllBoards() {
-        return boardRepository.findAll();
+    public List<Board> findAllBoards(SearchBoard searchBoard) {
+        return queryBoardRepository.findAll(searchBoard);
     }
 
     public Board findById(Long id) {
