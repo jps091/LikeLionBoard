@@ -33,6 +33,7 @@ public class QueryBoardRepository{
         return query.select(board)
                 .from(board)
                 .where(likeBoardAuthor(boardAuthor), likeBoardTitle(boardTitle))
+                .orderBy(board.id.desc())
                 .fetch();
     }
 

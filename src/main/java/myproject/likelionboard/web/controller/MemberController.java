@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import myproject.likelionboard.domain.entity.Member;
+import myproject.likelionboard.domain.exception.LoginIdDuplication;
 import myproject.likelionboard.domain.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,14 +44,19 @@ public class MemberController {
             return "/members/joinForm";
         }
 
-        Member saveMember = memberService.save(member);
+        try{
+            Member saveMember = memberService.save(member);
 
-        HttpSession session = request.getSession();
-        session.setAttribute("loginKey", saveMember);
+            HttpSession session = request.getSession();
+            session.setAttribute("loginKey", saveMember);
 
+            Long id = saveMember.getId();
+            redirectAttributes.addAttribute("id", id);
+            return "redirect:/members/{id}";
+        }catch (LoginIdDuplication e){
+            bindingResult.reject("idDuplication", "입력하신 ID는 이미 존재합니다. 다시 입력해주세요.");
+            return "/members/joinForm";
+        }
 
-        Long id = saveMember.getId();
-        redirectAttributes.addAttribute("id", id);
-        return "redirect:/members/{id}";
     }
 }
